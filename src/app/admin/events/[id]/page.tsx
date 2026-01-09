@@ -211,8 +211,8 @@ export default function EventDetailsPage() {
     const giftsByRank = (rank: number) => event.gifts?.find(g => g.rank === rank);
 
     return (
-        <div className="p-6">
-            <header className="mb-8 border-b border-gray-100 pb-8 flex flex-col md:flex-row md:items-start justify-between gap-4">
+        <div className="h-full flex flex-col p-6">
+            <header className="shrink-0 mb-8 border-b border-gray-100 pb-8 flex flex-col md:flex-row md:items-start justify-between gap-4">
                 <div>
                     <h1 className="text-4xl font-bold text-gray-800 mb-2" style={{ fontFamily: "Arial, sans-serif" }}>{event.title}</h1>
                     <div className="flex items-center gap-4 text-gray-500">
@@ -228,9 +228,9 @@ export default function EventDetailsPage() {
                 </Link>
             </header>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* LEFT COLUMN: CONFIG & RESULTS */}
-                <div className="flex flex-col gap-8 h-[500px] lg:h-[calc(100vh-240px)] overflow-y-auto pr-2 custom-scrollbar">
+                <div className="flex flex-col gap-8 h-full overflow-y-auto pr-2 custom-scrollbar">
                     {/* GIFTS MANAGEMENT */}
                     <section>
                         <div className="flex justify-between items-center mb-6">
@@ -265,7 +265,7 @@ export default function EventDetailsPage() {
                                             </div>
                                             <div>
                                                 <p className="font-bold text-lg text-gray-900">{gift.name}</p>
-                                                <p className="text-xs text-gray-400">ID: {gift.id}</p>
+                                                {/* <p className="text-xs text-gray-400">ID: {gift.id}</p> */}
                                             </div>
                                         </div>
                                         <button
@@ -285,9 +285,8 @@ export default function EventDetailsPage() {
                             )}
                         </div>
                     </section>
-
                     {/* RAFFLE RESULTS */}
-                    <section className="flex flex-col flex-1">
+                    <section className="flex flex-col">
                         <div className="flex justify-between items-center mb-6">
                             <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2" style={{ fontFamily: "Arial, sans-serif" }}>
                                 Raffle Results
@@ -302,7 +301,7 @@ export default function EventDetailsPage() {
                             </button>
                         </div>
 
-                        <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex-1">
+                        <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
                             {(event.winners && event.winners.length > 0) ? (
                                 <div className="space-y-4">
                                     {event.winners
@@ -338,7 +337,7 @@ export default function EventDetailsPage() {
                                     )}
                                 </div>
                             ) : (
-                                <div className="h-full flex flex-col items-center justify-center text-center py-8 text-gray-400">
+                                <div className="flex flex-col items-center justify-center text-center py-8 text-gray-400">
                                     <Trophy className="w-12 h-12 mb-3 opacity-20" />
                                     <p className="text-sm">No winners drawn yet.</p>
                                 </div>
@@ -348,8 +347,8 @@ export default function EventDetailsPage() {
                 </div>
 
                 {/* RIGHT COLUMN: PARTICIPATION (ATTENDANCE) */}
-                <section className="h-full flex flex-col">
-                    <div className="flex justify-between items-center mb-6">
+                <section className="h-full flex flex-col min-h-0">
+                    <div className="flex justify-between items-center mb-6 shrink-0">
                         <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2" style={{ fontFamily: "Arial, sans-serif" }}>
                             Participation
                         </h2>
@@ -373,7 +372,7 @@ export default function EventDetailsPage() {
                         </div>
                     </div>
 
-                    <div className="bg-gray-50 rounded-3xl border border-gray-200 h-[500px] lg:h-[calc(100vh-240px)] overflow-hidden flex flex-col">
+                    <div className="bg-gray-50 rounded-3xl border border-gray-200 flex-1 min-h-0 overflow-hidden flex flex-col">
                         <div className="overflow-y-auto p-2 flex-1 space-y-2 custom-scrollbar pr-2">
                             {participants.length === 0 ? (
                                 <div className="h-full flex flex-col items-center justify-center text-gray-400">
