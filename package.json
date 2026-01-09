@@ -37,5 +37,11 @@
     "eslint-config-next": "16.1.1",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "react-qr-scanner": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
   }
 }
