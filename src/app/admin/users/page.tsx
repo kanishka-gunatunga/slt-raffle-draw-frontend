@@ -7,12 +7,14 @@ import { Plus, QrCode, Trash2, X, Search, Download } from "lucide-react";
 import QRCode from "react-qr-code";
 import { motion, AnimatePresence } from "framer-motion";
 import { getImageUrl } from "@/lib/utils";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
 export default function UsersPage() {
     const [users, setUsers] = useState<User[]>([]);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [viewQrUser, setViewQrUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     // Form State
     const [name, setName] = useState("");
@@ -24,6 +26,7 @@ export default function UsersPage() {
     }, []);
 
     const fetchUsers = async () => {
+        setLoading(true);
         try {
             const { data } = await api.get('/users');
             setUsers(data);
@@ -36,6 +39,7 @@ export default function UsersPage() {
 
     const handleCreateUser = async (e: React.FormEvent) => {
         e.preventDefault();
+        setIsSubmitting(true);
         const formData = new FormData();
         formData.append('name', name);
         formData.append('location', location);
@@ -53,6 +57,8 @@ export default function UsersPage() {
         } catch (error) {
             console.error("Failed to create user", error);
             alert("Failed to create user");
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -76,80 +82,86 @@ export default function UsersPage() {
     );
 
     return (
-        <div className="p-6">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-8">
-                <div>
-                    <h1 className="text-3xl font-bold text-gray-800" style={{ fontFamily: "Arial, sans-serif" }}>User Management</h1>
-                    <p className="text-gray-500 mt-1">Manage system administrators and participants</p>
-                </div>
-                <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-                    <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                        <input
-                            type="text"
-                            placeholder="Search users..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="pl-10 pr-4 py-3 border border-gray-200 rounded-full w-full md:w-64 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all shadow-sm"
-                        />
+        <div className="h-full flex flex-col">
+            <div className="p-6 shrink-0 border-b border-gray-100/50">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+                    <div>
+                        <h1 className="text-3xl font-bold text-gray-800" style={{ fontFamily: "Arial, sans-serif" }}>User Management</h1>
+                        <p className="text-gray-500 mt-1">Manage system administrators and participants</p>
                     </div>
-                    <button
-                        onClick={() => setIsAddModalOpen(true)}
-                        className="flex items-center justify-center gap-2 px-6 py-3 text-white rounded-full transition-all shadow-md hover:shadow-lg hover:scale-105"
-                        style={{
-                            background: "linear-gradient(90deg, #FDC700 0%, #FF6900 100%)",
-                            fontWeight: "bold"
-                        }}
-                    >
-                        <Plus className="w-5 h-5" />
-                        Add Manager
-                    </button>
+                    <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+                        <div className="relative">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                            <input
+                                type="text"
+                                placeholder="Search users..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="pl-10 pr-4 py-3 border border-gray-200 rounded-full w-full md:w-64 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all shadow-sm"
+                            />
+                        </div>
+                        <button
+                            onClick={() => setIsAddModalOpen(true)}
+                            className="flex items-center justify-center gap-2 px-6 py-3 text-white rounded-full transition-all shadow-md hover:shadow-lg hover:scale-105"
+                            style={{
+                                background: "linear-gradient(90deg, #FDC700 0%, #FF6900 100%)",
+                                fontWeight: "bold"
+                            }}
+                        >
+                            <Plus className="w-5 h-5" />
+                            Add Manager
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            {loading ? (
-                <div className="text-center py-12 text-gray-400">Loading...</div>
-            ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {filteredUsers.length > 0 ? (
-                        filteredUsers.map(user => (
-                            <div key={user.id} className="bg-gray-50 rounded-2xl p-4 transition-all duration-300 border border-gray-200 hover:border-blue-300 hover:bg-blue-50/50 group relative">
-                                <div className="relative aspect-square rounded-xl overflow-hidden bg-gray-200 mb-4 shadow-inner">
-                                    <img
-                                        src={getImageUrl(user.photoUrl) || `https://ui-avatars.com/api/?name=${user.name}`}
-                                        alt={user.name}
-                                        className="w-full h-full object-cover"
-                                    />
-                                    <button
-                                        onClick={() => handleDeleteUser(user.id)}
-                                        className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-full hover:bg-red-600 shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-200 hover:scale-110"
-                                    >
-                                        <Trash2 className="w-4 h-4" />
-                                    </button>
+            <div className="flex-1 overflow-y-auto p-6 scroll-smooth custom-scrollbar">
+                {loading ? (
+                    <div className="flex justify-center items-center py-20">
+                        <LoadingSpinner size="lg" />
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        {filteredUsers.length > 0 ? (
+                            filteredUsers.map(user => (
+                                <div key={user.id} className="bg-gray-50 rounded-2xl p-4 transition-all duration-300 border border-gray-200 hover:border-blue-300 hover:bg-blue-50/50 group relative">
+                                    <div className="relative aspect-square rounded-xl overflow-hidden bg-gray-200 mb-4 shadow-inner">
+                                        <img
+                                            src={getImageUrl(user.photoUrl) || `https://ui-avatars.com/api/?name=${user.name}`}
+                                            alt={user.name}
+                                            className="w-full h-full object-cover"
+                                        />
+                                        <button
+                                            onClick={() => handleDeleteUser(user.id)}
+                                            className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-full hover:bg-red-600 shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-200 hover:scale-110"
+                                        >
+                                            <Trash2 className="w-4 h-4" />
+                                        </button>
+                                    </div>
+                                    <div className="px-1">
+                                        <h3 className="font-bold text-lg text-gray-900 truncate">{user.name}</h3>
+                                        <p className="text-sm text-gray-500 mb-4 flex items-center gap-1">
+                                            <span className="w-2 h-2 rounded-full bg-green-400"></span>
+                                            {user.location || "No Location"}
+                                        </p>
+                                        <button
+                                            onClick={() => setViewQrUser(user)}
+                                            className="w-full flex items-center justify-center gap-2 py-2.5 border border-blue-200 text-blue-600 rounded-xl hover:bg-blue-50 transition-colors font-semibold text-sm"
+                                        >
+                                            <QrCode className="w-4 h-4" />
+                                            View QR Code
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className="px-1">
-                                    <h3 className="font-bold text-lg text-gray-900 truncate">{user.name}</h3>
-                                    <p className="text-sm text-gray-500 mb-4 flex items-center gap-1">
-                                        <span className="w-2 h-2 rounded-full bg-green-400"></span>
-                                        {user.location || "No Location"}
-                                    </p>
-                                    <button
-                                        onClick={() => setViewQrUser(user)}
-                                        className="w-full flex items-center justify-center gap-2 py-2.5 border border-blue-200 text-blue-600 rounded-xl hover:bg-blue-50 transition-colors font-semibold text-sm"
-                                    >
-                                        <QrCode className="w-4 h-4" />
-                                        View QR Code
-                                    </button>
-                                </div>
+                            ))
+                        ) : (
+                            <div className="col-span-full text-center py-12 text-gray-500">
+                                No users found matching "{searchQuery}"
                             </div>
-                        ))
-                    ) : (
-                        <div className="col-span-full text-center py-12 text-gray-500">
-                            No users found matching "{searchQuery}"
-                        </div>
-                    )}
-                </div>
-            )}
+                        )}
+                    </div>
+                )}
+            </div>
 
             {/* Add User Modal */}
             <AnimatePresence>
@@ -200,12 +212,18 @@ export default function UsersPage() {
                                 <div className="pt-2">
                                     <button
                                         type="submit"
-                                        className="w-full text-white font-bold py-3.5 rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg"
+                                        disabled={isSubmitting}
+                                        className="w-full text-white font-bold py-3.5 rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg flex justify-center items-center gap-2 disabled:opacity-70 disabled:hover:scale-100 disabled:cursor-not-allowed"
                                         style={{
                                             background: "linear-gradient(90deg, #FDC700 0%, #FF6900 100%)",
                                         }}
                                     >
-                                        Create User
+                                        {isSubmitting ? (
+                                            <>
+                                                <LoadingSpinner size="sm" className="text-white" />
+                                                Creating User...
+                                            </>
+                                        ) : "Create User"}
                                     </button>
                                 </div>
                             </form>
@@ -242,6 +260,7 @@ export default function UsersPage() {
                                 <div className="mt-8 flex gap-3">
                                     <button
                                         onClick={() => {
+                                            if (!viewQrUser) return;
                                             const svg = document.getElementById(`qr-code-${viewQrUser.id}`);
                                             if (!svg) return;
 

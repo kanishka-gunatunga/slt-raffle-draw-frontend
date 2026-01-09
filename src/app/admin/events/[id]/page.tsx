@@ -11,6 +11,8 @@ import { getImageUrl } from "@/lib/utils";
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
+
 export default function EventDetailsPage() {
     const { id: eventId } = useParams();
     const [event, setEvent] = useState<Event | null>(null);
@@ -177,6 +179,7 @@ export default function EventDetailsPage() {
             return;
         }
 
+        setScanning(true);
         setScanFeedback({ type: 'info', message: 'Processing...' });
 
         try {
@@ -203,7 +206,7 @@ export default function EventDetailsPage() {
         }
     };
 
-    if (!event) return <div className="p-8 text-center text-gray-500">Loading Event...</div>;
+    if (!event) return <div className="h-screen flex items-center justify-center"><LoadingSpinner size="lg" /></div>;
 
     const giftsByRank = (rank: number) => event.gifts?.find(g => g.rank === rank);
 

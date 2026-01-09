@@ -80,8 +80,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
             {/* Main Content */}
             <main className="flex-1 h-full overflow-hidden flex flex-col">
-                <div className="flex-1 overflow-y-auto p-4 md:p-8">
-                    <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl min-h-full border border-white/20 overflow-hidden flex flex-col">
+                <div className="flex-1 overflow-hidden p-4 md:p-8">
+                    <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl h-full border border-white/20 overflow-hidden flex flex-col">
                         {children}
                     </div>
                 </div>
