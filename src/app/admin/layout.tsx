@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Users, Calendar, LogOut, LayoutDashboard } from "lucide-react";
+import { Users, Calendar, LogOut, LayoutDashboard, FileText } from "lucide-react";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     const router = useRouter();
@@ -65,6 +65,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 >
                     <Calendar className="w-5 h-5" />
                     Events
+                </Link>
+                <Link
+                    href="/admin/reports"
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-medium ${isActive('/admin/reports') ? 'bg-white/20 text-white shadow-lg border border-white/10' : 'text-white/70 hover:bg-white/10 hover:text-white'}`}
+                >
+                    <FileText className="w-5 h-5" />
+                    Reports
                 </Link>
             </nav>
 

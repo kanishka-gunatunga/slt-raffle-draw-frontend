@@ -25,6 +25,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+button {
+  cursor: pointer;
+}
+
 /* Custom Scrollbar - Cross Browser Support */
 .custom-scrollbar {
   scrollbar-width: thin;

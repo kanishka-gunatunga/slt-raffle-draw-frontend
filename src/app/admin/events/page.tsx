@@ -124,7 +124,7 @@ export default function EventsPage() {
                                                 <div className="flex gap-2">
                                                     <span className={`px-2 py-1 text-xs font-bold rounded-full uppercase tracking-wider ${event.status === 'ACTIVE' ? 'bg-green-100 text-green-700' :
                                                         event.status === 'COMPLETED' ? 'bg-gray-100 text-gray-600' :
-                                                            event.status === 'UPCOMING' ? 'bg-blue-100 text-blue-700' : // Explicitly handle UPCOMING
+                                                            event.status === 'UPCOMING' ? 'bg-blue-100 text-blue-700' :
                                                                 'bg-gray-100 text-gray-600'
                                                         }`}>
                                                         {event.status}
