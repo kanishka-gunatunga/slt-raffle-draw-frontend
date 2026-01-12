@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from 'react';
-import QrScanner from 'react-qr-scanner';
+import { Scanner } from '@yudiel/react-qr-scanner';
 import { X, Check } from 'lucide-react';
 
 interface QrScannerModalProps {
@@ -11,9 +10,12 @@ interface QrScannerModalProps {
 }
 
 export default function QrScannerModal({ onScan, onClose, feedback }: QrScannerModalProps) {
-    const handleScan = (data: { text: string } | null) => {
-        if (data && data.text) {
-            onScan(data.text);
+    const handleScan = (detectedCodes: any[]) => {
+        if (detectedCodes && detectedCodes.length > 0) {
+            const code = detectedCodes[0];
+            if (code.rawValue) {
+                onScan(code.rawValue);
+            }
         }
     };
 
@@ -30,14 +32,18 @@ export default function QrScannerModal({ onScan, onClose, feedback }: QrScannerM
                 <X className="w-6 h-6" />
             </button>
             <div className="w-full max-w-sm bg-black rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl relative aspect-[3/4]">
-                <QrScanner
-                    delay={100}
-                    onError={handleError}
+                <Scanner
                     onScan={handleScan}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    constraints={{
-                        audio: false,
-                        video: { facingMode: 'environment' }
+                    onError={handleError}
+                    components={{
+                        onOff: false,
+                        torch: false,
+                        zoom: false,
+                        finder: false // We use our own custom finder overlay
+                    }}
+                    styles={{
+                        container: { width: '100%', height: '100%' },
+                        video: { width: '100%', height: '100%', objectFit: 'cover' }
                     }}
                 />
 
