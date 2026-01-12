@@ -228,9 +228,9 @@ export default function EventDetailsPage() {
                 </Link>
             </header>
 
-            <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:overflow-hidden overflow-y-auto lg:overflow-y-visible">
                 {/* LEFT COLUMN: CONFIG & RESULTS */}
-                <div className="flex flex-col gap-8 h-full overflow-y-auto pr-2 custom-scrollbar">
+                <div className="flex flex-col gap-8 lg:h-full lg:overflow-y-auto pr-2 custom-scrollbar">
                     {/* GIFTS MANAGEMENT */}
                     <section>
                         <div className="flex justify-between items-center mb-6">
@@ -347,7 +347,7 @@ export default function EventDetailsPage() {
                 </div>
 
                 {/* RIGHT COLUMN: PARTICIPATION (ATTENDANCE) */}
-                <section className="h-full flex flex-col min-h-0">
+                <section className="lg:h-full flex flex-col min-h-[500px] lg:min-h-0">
                     <div className="flex justify-between items-center mb-6 shrink-0">
                         <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2" style={{ fontFamily: "Arial, sans-serif" }}>
                             Participation
