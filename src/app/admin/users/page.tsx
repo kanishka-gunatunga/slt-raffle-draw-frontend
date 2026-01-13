@@ -270,9 +270,22 @@ export default function UsersPage() {
                                             const img = new Image();
 
                                             img.onload = () => {
-                                                canvas.width = img.width;
-                                                canvas.height = img.height;
-                                                ctx?.drawImage(img, 0, 0);
+                                                // High resolution for clear printing/scanning
+                                                const size = 1024;
+                                                canvas.width = size;
+                                                canvas.height = size;
+
+                                                if (ctx) {
+                                                    // Fill white background (transparent QRs can fail on dark themes/paper)
+                                                    ctx.fillStyle = "#FFFFFF";
+                                                    ctx.fillRect(0, 0, size, size);
+
+                                                    // Draw image scaled to canvas size
+                                                    // Add a small padding (50px) to ensure quiet zone
+                                                    const padding = 50;
+                                                    ctx.drawImage(img, padding, padding, size - (padding * 2), size - (padding * 2));
+                                                }
+
                                                 const pngFile = canvas.toDataURL("image/png");
                                                 const downloadLink = document.createElement("a");
                                                 downloadLink.download = `QR-${viewQrUser.name.replace(/\s+/g, '-')}.png`;
