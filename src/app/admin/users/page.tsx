@@ -84,13 +84,13 @@ export default function UsersPage() {
     return (
         <div className="h-full flex flex-col">
             <div className="p-6 shrink-0 border-b border-gray-100/50">
-                <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+                <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
                     <div>
                         <h1 className="text-3xl font-bold text-gray-800" style={{ fontFamily: "Arial, sans-serif" }}>User Management</h1>
                         <p className="text-gray-500 mt-1">Manage system administrators and participants</p>
                     </div>
-                    <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-                        <div className="relative">
+                    <div className="flex flex-col md:flex-row gap-4 w-full lg:w-auto">
+                        <div className="relative w-full md:w-auto">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                             <input
                                 type="text"
@@ -102,7 +102,7 @@ export default function UsersPage() {
                         </div>
                         <button
                             onClick={() => setIsAddModalOpen(true)}
-                            className="flex items-center justify-center gap-2 px-6 py-3 text-white rounded-full transition-all shadow-md hover:shadow-lg hover:scale-105"
+                            className="flex items-center justify-center gap-2 px-6 py-3 text-white rounded-full transition-all shadow-md hover:shadow-lg hover:scale-105 shrink-0"
                             style={{
                                 background: "linear-gradient(90deg, #FDC700 0%, #FF6900 100%)",
                                 fontWeight: "bold"
@@ -251,10 +251,11 @@ export default function UsersPage() {
                                 </button>
                                 <h2 className="text-2xl font-bold mb-2 text-gray-900">{viewQrUser.name}</h2>
                                 <p className="text-gray-500 mb-8">Scan to mark attendance</p>
-                                <div className="flex justify-center p-4 bg-white rounded-xl shadow-inner border border-gray-100 mx-auto w-fit" id="qr-code-container">
+                                <div className="flex justify-center p-4 bg-white rounded-xl shadow-inner border border-gray-100 mx-auto w-full max-w-[250px]" id="qr-code-container">
                                     <QRCode
                                         value={viewQrUser.id.toString()}
                                         id={`qr-code-${viewQrUser.id}`}
+                                        style={{ height: "auto", maxWidth: "100%", width: "100%" }}
                                     />
                                 </div>
                                 <div className="mt-8 flex gap-3">

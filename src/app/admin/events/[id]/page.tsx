@@ -233,13 +233,13 @@ export default function EventDetailsPage() {
                 <div className="flex flex-col gap-8 lg:h-full lg:overflow-y-auto pr-2 custom-scrollbar">
                     {/* GIFTS MANAGEMENT */}
                     <section>
-                        <div className="flex justify-between items-center mb-6">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
                             <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2" style={{ fontFamily: "Arial, sans-serif" }}>
                                 Prize Configuration
                             </h2>
                             <button
                                 onClick={() => setIsGiftModalOpen(true)}
-                                className="text-white px-5 py-2.5 rounded-full flex items-center gap-2 shadow-md hover:shadow-lg hover:scale-105 transition-all text-sm font-bold"
+                                className="text-white px-5 py-2.5 rounded-full flex items-center justify-center gap-2 shadow-md hover:shadow-lg hover:scale-105 transition-all text-sm font-bold w-full sm:w-auto"
                                 style={{
                                     background: "linear-gradient(90deg, #FDC700 0%, #FF6900 100%)",
                                 }}
@@ -287,14 +287,14 @@ export default function EventDetailsPage() {
                     </section>
                     {/* RAFFLE RESULTS */}
                     <section className="flex flex-col">
-                        <div className="flex justify-between items-center mb-6">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
                             <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2" style={{ fontFamily: "Arial, sans-serif" }}>
                                 Raffle Results
                             </h2>
                             <button
                                 onClick={generatePDF}
                                 disabled={!event?.winners?.length}
-                                className="bg-white text-gray-700 border border-gray-200 px-4 py-2 rounded-full flex items-center gap-2 shadow-sm hover:bg-gray-50 hover:border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm font-bold"
+                                className="bg-white text-gray-700 border border-gray-200 px-4 py-2 rounded-full flex items-center justify-center gap-2 shadow-sm hover:bg-gray-50 hover:border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm font-bold w-full sm:w-auto"
                             >
                                 <FileText className="w-4 h-4" />
                                 Report
@@ -348,14 +348,14 @@ export default function EventDetailsPage() {
 
                 {/* RIGHT COLUMN: PARTICIPATION (ATTENDANCE) */}
                 <section className="lg:h-full flex flex-col min-h-[500px] lg:min-h-0">
-                    <div className="flex justify-between items-center mb-6 shrink-0">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 shrink-0">
                         <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2" style={{ fontFamily: "Arial, sans-serif" }}>
                             Participation
                         </h2>
-                        <div className="flex gap-2">
+                        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                             <button
                                 onClick={() => setIsAddModalOpen(true)}
-                                className="text-white px-5 py-2.5 rounded-full flex items-center gap-2 shadow-md hover:shadow-lg hover:scale-105 transition-all text-sm font-bold"
+                                className="text-white px-5 py-2.5 rounded-full flex items-center justify-center gap-2 shadow-md hover:shadow-lg hover:scale-105 transition-all text-sm font-bold w-full sm:w-auto"
                                 style={{
                                     background: "linear-gradient(90deg, #FDC700 0%, #FF6900 100%)",
                                 }}
@@ -365,7 +365,7 @@ export default function EventDetailsPage() {
                             </button>
                             <button
                                 onClick={() => setScanning(true)}
-                                className="bg-gray-800 text-white px-4 py-2.5 rounded-full flex items-center gap-2 hover:bg-black shadow-md transition-all"
+                                className="bg-gray-800 text-white px-4 py-2.5 rounded-full flex items-center justify-center gap-2 hover:bg-black shadow-md transition-all w-full sm:w-auto"
                             >
                                 <QrCode className="w-4 h-4" />
                             </button>
