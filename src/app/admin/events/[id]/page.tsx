@@ -214,7 +214,7 @@ export default function EventDetailsPage() {
         <div className="h-full flex flex-col p-6">
             <header className="shrink-0 mb-8 border-b border-gray-100 pb-8 flex flex-col md:flex-row md:items-start justify-between gap-4">
                 <div>
-                    <h1 className="text-4xl font-bold text-gray-800 mb-2" style={{ fontFamily: "Arial, sans-serif" }}>{event.title}</h1>
+                    <h1 className="text-2xl md:text-4xl font-bold text-gray-800 mb-2" style={{ fontFamily: "Arial, sans-serif" }}>{event.title}</h1>
                     <div className="flex items-center gap-4 text-gray-500">
                         <p className="flex items-center gap-2"><Calendar className="w-4 h-4" /> {new Date(event.date).toLocaleDateString()}</p>
                         <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
@@ -234,7 +234,7 @@ export default function EventDetailsPage() {
                     {/* GIFTS MANAGEMENT */}
                     <section>
                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
-                            <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2" style={{ fontFamily: "Arial, sans-serif" }}>
+                            <h2 className="text-xl md:text-2xl font-bold text-gray-800 flex items-center gap-2" style={{ fontFamily: "Arial, sans-serif" }}>
                                 Prize Configuration
                             </h2>
                             <button
@@ -288,7 +288,7 @@ export default function EventDetailsPage() {
                     {/* RAFFLE RESULTS */}
                     <section className="flex flex-col">
                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
-                            <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2" style={{ fontFamily: "Arial, sans-serif" }}>
+                            <h2 className="text-xl md:text-2xl font-bold text-gray-800 flex items-center gap-2" style={{ fontFamily: "Arial, sans-serif" }}>
                                 Raffle Results
                             </h2>
                             <button
@@ -349,7 +349,7 @@ export default function EventDetailsPage() {
                 {/* RIGHT COLUMN: PARTICIPATION (ATTENDANCE) */}
                 <section className="lg:h-full flex flex-col min-h-[500px] lg:min-h-0">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 shrink-0">
-                        <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2" style={{ fontFamily: "Arial, sans-serif" }}>
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-800 flex items-center gap-2" style={{ fontFamily: "Arial, sans-serif" }}>
                             Participation
                         </h2>
                         <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">

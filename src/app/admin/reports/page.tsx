@@ -119,7 +119,7 @@ export default function ReportsPage() {
             <div className="p-6 shrink-0 border-b border-gray-100/50">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-800" style={{ fontFamily: "Arial, sans-serif" }}>Reports & Results</h1>
+                        <h1 className="text-2xl md:text-3xl font-bold text-gray-800" style={{ fontFamily: "Arial, sans-serif" }}>Reports & Results</h1>
                         <p className="text-gray-500 mt-1">Download official raffle draw results</p>
                     </div>
                     <div className="relative">
@@ -144,13 +144,13 @@ export default function ReportsPage() {
                     <div className="grid grid-cols-1 gap-4">
                         {filteredEvents.map(event => (
                             <div key={event.id} className="bg-white p-6 rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-lg transition-all flex flex-col md:flex-row items-center justify-between gap-6 group">
-                                <div className="flex items-center gap-6 w-full">
+                                <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full text-center sm:text-left">
                                     <div className="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
                                         <Trophy className="w-8 h-8" />
                                     </div>
-                                    <div>
-                                        <h3 className="text-xl font-bold text-gray-900 mb-1">{event.title}</h3>
-                                        <div className="flex items-center gap-4 text-sm text-gray-500">
+                                    <div className="w-full sm:w-auto">
+                                        <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-1">{event.title}</h3>
+                                        <div className="flex items-center justify-center sm:justify-start gap-4 text-sm text-gray-500 flex-wrap">
                                             <span className="flex items-center gap-1.5 bg-gray-100 px-2.5 py-1 rounded-md">
                                                 <Calendar className="w-4 h-4" />
                                                 {new Date(event.date).toLocaleDateString()}
@@ -164,7 +164,7 @@ export default function ReportsPage() {
                                 </div>
                                 <button
                                     onClick={() => handleDownloadReport(event)}
-                                    className="px-6 py-3 bg-gray-900 text-white rounded-xl font-bold hover:bg-blue-600 hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center gap-2 whitespace-nowrap w-full md:w-auto justify-center"
+                                    className="px-6 py-3 bg-gray-900 text-sm md:text-base text-white rounded-xl font-bold hover:bg-blue-600 hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center gap-2 whitespace-nowrap w-full md:w-auto justify-center"
                                 >
                                     <Download className="w-5 h-5" />
                                     Download PDF

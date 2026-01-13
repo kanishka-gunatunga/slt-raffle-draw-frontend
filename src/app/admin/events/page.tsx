@@ -74,7 +74,7 @@ export default function EventsPage() {
             <div className="p-6 shrink-0 border-b border-gray-100/50">
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-800" style={{ fontFamily: "Arial, sans-serif" }}>Event Management</h1>
+                        <h1 className="text-2xl md:text-3xl font-bold text-gray-800" style={{ fontFamily: "Arial, sans-serif" }}>Event Management</h1>
                         <p className="text-gray-500 mt-1">Manage raffle draw events</p>
                     </div>
                     <div className="flex flex-col md:flex-row gap-4 w-full lg:w-auto">
